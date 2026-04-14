@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Políticas Públicas: La discusión actual</title>
+    
+    <!-- Tipografía: Lora (Serif académica) y Inter (Sans funcional) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Iconos Profesionales -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #002147; /* Azul Oxford */
+            --accent: #b8860b;  /* Oro Viejo */
+            --bg: #ffffff;
+            --soft-bg: #fdfaf5;
+            --text: #1a1a1a;
+            --text-light: #5a6b7d;
+            --border: #e1e8ed;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; overflow: hidden; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background-color: #111;
+            line-height: 1.6;
+            height: 100vh;
+        }
+
+        /* --- NAVEGACIÓN Y PROGRESO --- */
+        #progress-bar {
+            position: fixed;
+            top: 0; left: 0; height: 4px;
+            background: var(--accent);
+            width: 0%; z-index: 1000;
+            transition: width 0.3s ease;
+        }
+
+        .side-nav {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: flex-end;
+        }
+
+        .side-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .side-nav-dot {
+            width: 32px; height: 32px;
+            border-radius: 4px;
+            background: white;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .side-nav-item.active .side-nav-dot {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .side-nav-label {
+            opacity: 0;
+            transform: translateX(10px);
+            transition: var(--transition);
+            background: var(--primary);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+        }
+
+        .side-nav-item:hover .side-nav-label { opacity: 1; transform: translateX(0); }
+
+        /* --- CONTROLES DE DIAPOSITIVA --- */
+        .slide-controls {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 50;
+        }
+
+        .nav-btn {
+            background: white;
+            border: 1px solid var(--border);
+            color: var(--primary);
+            width: 45px; height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .nav-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* --- ESTRUCTURA DE SLIDES --- */
+        #slides-wrapper {
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--bg);
+            flex-shrink: 0;
+            padding: 5% 10%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide:nth-child(even) { background-color: var(--soft-bg); }
+
+        /* --- TIPOGRAFÍA Y CONTENIDO --- */
+        h1, h2, h3 { font-family: 'Lora', serif; font-weight: 700; color: var(--primary); }
+        
+        .title-header {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .quote {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 1.8rem;
+            color: var(--primary);
+            border-left: 5px solid var(--accent);
+            padding-left: 2rem;
+            margin: 2rem 0;
+            line-height: 1.4;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        .image-container {
+            height: 100%;
+            max-height: 450px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            padding: 10px;
+            background: white;
+            box-shadow: 15px 15px 0px rgba(184, 134, 11, 0.05);
+        }
+
+        .image-container img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+
+        .card-panel {
+            background: white;
+            padding: 2.5rem;
+            border: 1px solid var(--border);
+            border-top: 3px solid var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .citation {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 1rem;
+            display: block;
+        }
+
+        /* PORTADA */
+        .hero { text-align: center; justify-content: center; }
+        .portrait {
+            width: 200px; height: 280px;
+            object-fit: cover;
+            filter: grayscale(100%) sepia(20%);
+            border: 1px solid var(--border);
+            padding: 6px; background: white;
+        }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th { background: var(--primary); color: white; padding: 1rem; text-align: left; font-size: 0.9rem; }
+        td { padding: 1rem; border-bottom: 1px solid var(--border); font-size: 1rem; }
+
+    </style>
+</head>
+<body>
+
+    <div id="progress-bar"></div>
+
+    <!-- NAVEGACIÓN LATERAL NUMERADA -->
+    <nav class="side-nav">
+        <a class="side-nav-item active" onclick="jumpTo(0)"><span class="side-nav-label">Portada</span><div class="side-nav-dot">0</div></a>
+        <a class="side-nav-item" onclick="jumpTo(1)"><span class="side-nav-label">Índice Ensayo</span><div class="side-nav-dot">1</div></a>
+        <a class="side-nav-item" onclick="jumpTo(2)"><span class="side-nav-label">Programa Sesiones</span><div class="side-nav-dot">2</div></a>
+        <a class="side-nav-item" onclick="jumpTo(3)"><span class="side-nav-label">T1: Transición AP</span><div class="side-nav-dot">3</div></a>
+        <a class="side-nav-item" onclick="jumpTo(6)"><span class="side-nav-label">T2: Calidad Gobierno</span><div class="side-nav-dot">4</div></a>
+        <a class="side-nav-item" onclick="jumpTo(9)"><span class="side-nav-label">T3: Diseño Políticas</span><div class="side-nav-dot">5</div></a>
+        <a class="side-nav-item" onclick="jumpTo(12)"><span class="side-nav-label">T4: Instrumentación</span><div class="side-nav-dot">6</div></a>
+        <a class="side-nav-item" onclick="jumpTo(15)"><span class="side-nav-label">Conclusiones</span><div class="side-nav-dot">7</div></a>
+    </nav>
+
+    <div id="slides-wrapper">
+
+        <!-- 1. PORTADA -->
+        <section class="slide hero">
+            <p style="letter-spacing: 5px; color: var(--text-light); font-size: 0.8rem; margin-bottom: 1rem;">UNIVERSIDAD DE GUADALAJARA</p>
+            <h1 style="font-size: 3.5rem; line-height: 1.1; margin-bottom: 1.5rem;">Políticas Públicas:<br><span style="color: var(--accent);">La discusión actual</span></h1>
+            
+            <div style="display: flex; justify-content: center; gap: 30px; margin-bottom: 2rem;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Leviathan_by_Thomas_Hobbes.jpg/440px-Leviathan_by_Thomas_Hobbes.jpg" class="portrait" alt="Leviathan">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Santi_di_Tito_-_Niccolo_Machiavelli%27s_portrait_head_adjusted.jpg/440px-Santi_di_Tito_-_Niccolo_Machiavelli%27s_portrait_head_adjusted.jpg" class="portrait" alt="Machiavelli">
+            </div>
+
+            <p style="font-size: 1.4rem; font-family: 'Lora';">Prof. Carlos A Navarrete</p>
+            <p style="color: var(--text-light); font-size: 0.9rem;">Dpto. de Economía y Ciencias Políticas</p>
+            
+            <div class="slide-controls">
+                <button class="nav-btn" onclick="navigate(1)"><i class="fa fa-chevron-down"></i></button>
+            </div>
+        </section>
+
+        <!-- 2. ÍNDICE ENSAYO -->
+        <section class="slide">
+            <h2 class="title-header">I. Ejes del Análisis</h2>
+            <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start;">
+                <div class="card-panel">
+                    <span class="citation">Tema 1</span>
+                    <h3>La Transición Ontológica</h3>
+                    <p>Del gerencialismo mecanicista a la gobernanza de sistemas complejos e interdependientes.</p>
+                </div>
+                <div class="card-panel">
+                    <span class="citation">Tema 2</span>
+                    <h3>Calidad del Gobierno</h3>
+                    <p>Integración de la imparcialidad institucional con la efectividad directiva científico-tecnológica.</p>
+                </div>
+                <div class="card-panel">
+                    <span class="citation">Tema 3</span>
+                    <h3>Diseño de Políticas</h3>
+                    <p>Dimensiones epistémicas y el impacto de la construcción social en la democracia.</p>
+                </div>
+                <div class="card-panel">
+                    <span class="citation">Tema 4</span>
+                    <h3>Sociología de Instrumentos</h3>
+                    <p>La instrumentación como arena de disputa estratégica y estructuración del poder político.</p>
+                </div>
+            </div>
+            <div class="slide-controls">
+                <button class="nav-btn" onclick="navigate(-1)"><i class="fa fa-chevron-up"></i></button>
+                <button class="nav-btn" onclick="navigate(1)"><i class="fa fa-chevron-down"></i></button>
+            </div>
+        </section>
+
+        <!-- 3. PROGRAMA SESIONES -->
+        <section class="slide">
+            <h2 class="title-header">II. Programa del Curso</h2>
+            <div style="background: white; padding: 2.5rem; border: 1px solid var(--border);">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sesión</th>
+                            <th>Ejes Temáticos</th>
+                            <th>Bibliografía Obligatoria</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>S4</strong></td><td>Administración Pública, Gobierno y Políticas Públicas.</td><td>Peters et al. (2022); Ingram & Schneider.</td></tr>
+                        <tr><td><strong>S5</strong></td><td>La hechura de las políticas: Proceso vs Contenido.</td><td>Siddiki & Curley (2022); Bryson et al. (2023).</td></tr>
+                        <tr><td><strong>S6</strong></td><td>Instituciones, normas e instrumentos de acción.</td><td>Lascoumes & Le Galès; Jolly (2007).</td></tr>
+                        <tr><td><strong>S7</strong></td><td>Gobernanza y gobernabilidad en el Siglo XXI.</td><td>Funck & Karlsson (2024); Aguilar (2022).</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="slide-controls">
+                <button class="nav-btn" onclick="navigate(-1)"><i class="fa fa-chevron-up"></i></button>
+                <button class="nav-btn" onclick="navigate(1)"><i class="fa fa-chevron-down"></i></button>
+            </div>
+        </section>
+
+        <!-- 4. TEMA 1.1 -->
+        <section class="slide">
+            <h2 class="title-header">3.1 Complejidad e Interdependencia</h2>
+            <div class="grid">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&q=80&w=1000" alt="Lectura Reflexiva">
+                </div>
+                <div>
+                    <p>La sociedad contemporánea se rige por una tríada conceptual ineludible:</p>
+                    <div class="quote">"Complejidad - Insuficiencia - Interdependencia"</div>
+                    <p>Ninguna agencia posee por sí sola los recursos para resolver problemas multiformes; nace el <strong>cogobierno</strong>.</p>
+                    <span class="citation">Aguilar (2023, p. 110)</span>
+                </div>
+            </div>
+            <div class="slide-controls"><button class="nav-btn" onclick="navigate(-1)"><i class="fa fa-chevron-up"></i></button><button class="nav-btn" onclick="navigate(1)"><i class="fa fa-chevron-down"></i></button></div>
+        </section>
+
+        <!-- 5. TEMA 1.2 -->
+        <section class="slide">
+            <h2 class="title-header">3.2 Imaginarios Post-NGP</h2>
+            <div class="grid">
+                <div>
+                    <p>Las narrativas post-gerencialistas actúan como <strong>"imaginarios sociales"</strong>: órdenes morales que legitiman utopías colaborativas.</p>
+                    <div class="card-panel" style="margin-top: 1.5rem;">
+                        <h3>Vocabulario de Motivos</h3>
+                        <p>Uso de términos como <em>confianza</em> y <em>holismo</em> para construir una imagen distópica del pasado fragmentado.</p>
+                    </div>
+                    <span class="citation">Funck & Karlsson (2024, p. 2686)</span>
+                </div>
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1455849318743-b2233052fcff?auto=format&fit=crop&q=80&w=1000" alt="Escritorio de estudio">
+                </div>
+            </div>
+            <div class="slide-controls"><button class="nav-btn" onclick="navigate(-1)"><i class="fa fa-chevron-up"></i></button><button class="nav-btn" onclick="navigate(1)"><i class="fa fa-chevron-down"></i></button></div>
+        </section>
+
+        <!-- 6. TEMA 1.3 -->
+        <section class="slide">
+            <h2 class="title-header">3.3 La Repolitización Necesaria</h2>
+            <div class="hero">
+                <p style="max-width: 850px; margin: 0 auto 2.5rem; font-size: 1.5rem; font-family: 'Lora'; font-style: italic;">
+                    "El servicio público es una organización inherentemente política, que persigue objetivos políticos bajo liderazgo político".
+                </p>
+                <div class="image-container" style="max-height: 350px; max-width: 800px; margin: 0 auto;">
+                    <img src="https://images.unsplash.com/photo-1521791136064-7986c2923216?auto=format&fit=crop&q=80&w=1000" alt="Colaboración Política">
+                </div>
+                <span class="citation">Peters, Pierre, Sørensen & Torfing (2022, p. 967)</span>
+            </div>
+            <div class="slide-controls"><button class="nav-btn" onclick="navigate(-1)"><i class="fa fa-chevron-up"></i></button><button class="nav-btn" onclick="navigate(1)"><i class="fa fa-chevron-down"></i></button></div>
+        </section>
+
+        <!-- 7. TEMA 2.1 -->
+        <section class="slide">
+            <h2 class="title-header">4.1 Calidad del Gobierno</h2>
+            <div class="grid">
+                <div>
+                    <p>La propiedad esencial de la calidad gubernamental es la <strong>imparcialidad</strong>: ejercicio de autoridad sin discriminación ni privilegios.</p>
+                    <div class="card-panel" style="background: var(--soft-bg); border-left-color: var(--accent);">
+                        <p>La legalidad escrupulosa no garantiza la efectividad social; la imparcialidad puede ser inefectiva.</p>
+                    </div>
+                    <span class="citation">Aguilar (2023, p. 123)</span>
+                </div>
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=1000" alt="Balanza de Justicia">
+                </div>
+            </div>
+            <div class="slide-controls"><button class="nav-btn" onclick="navigate(-1)"><i class="fa fa-chevron-up"></i></button><button class="nav-btn" onclick="navigate(1)"><i class="fa fa-chevron-down"></i></button></div>
+        </section>
+
+        <!-- 8. TEMA 2.2 -->
+        <section class="slide">
+            <h2 class="title-header">4.2 Integración Ejecutiva</h2>
+            <div class="hero">
+                <div class="quote" style="border: none; text-align: center;">"La verdadera calidad exige una síntesis bidimensional"</div>
+                <div style="display: flex; gap: 3rem; justify-content: center; margin-top: 3rem;">
+                    <div class="card-panel" style="width: 350px; text-align: left;">
+                        <h3 style="font-size: 1.2rem;">Propiedades Axiológicas</h3>
+                        <p>Instituciones, valores y normas de conducta imparcial.</p>
+                    </div>
+                    <div class="card-panel" style="width: 350px; text-align: left;">
+                        <h3 style="font-size: 1.2rem;">Propiedades Ejecutivas</h3>
+                        <p>Capacidad científico-tecnológica y efectividad directiva.</p>
+                    </div>
+                </div>
+                <span class="citation">Aguilar (2023, p. 129)</span>
+            </div>
+            <div class="slide-controls"><button class="nav-btn" onclick="navigate(-1)"><i class="fa fa-chevron-up"></i></button><button class="nav-btn" onclick="navigate(1)"><i class="fa fa-chevron-down"></i></button></div>
+        </section>
+
+        <!-- 9. TEMA 2.3 -->
+        <section class="slide">
+            <h2 class="title-header">4.3 Estrategia y Poder</h2>
+            <div class="grid">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1529697210530-8c4bb1358ce5?auto=format&fit=crop&q=80&w=1000" alt="Ajedrez y Estrategia">
+                </div>
+                <div>
+                    <p>Los fallos en coordinación a menudo enmascaran conflictos políticos por jurisdicción y prestigio.</p>
+                    <p>Ignorar estas batallas condena al fracaso cualquier intento de mejora puramente gerencial.</p>
+                    <span class="citation">Peters et al. (2022, p. 968)</span>
+                </div>
+            </div>
+            <div class="slide-controls"><button class="nav-btn" onclick="navigate(-1)"><i class="fa fa-chevron-up"></i></button><button class="nav-btn" onclick="navigate(1)"><i class="fa fa-chevron-down"></i></button></div>
+        </section>
+
+        <!-- 10. TEMA 3.1 -->
+        <section class="slide">
+            <h2 class="title-header">5.1 El Diseño como Contenido</h2>
+            <div class="grid">
+                <div>
+                    <p>Diferenciamos el diseño como <strong>proceso</strong> (elección frente a restricciones) y como <strong>sustantivo</strong> (resultado tangible).</p>
+                    <div class="card-panel">
+                        <h3>Gramática Institucional</h3>
+                        <p>Permite analizar sintácticamente cómo las reglas asignan autoridad y discrecionalidad.</p>
+                    </div>
+                    <span class="citation">Siddiki & Curley (2022, p. 118)</span>
+                </div>
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=1000" alt="Análisis de Políticas">
+                </div>
+            </div>
+            <div class="slide-controls"><button class="nav-btn" onclick="navigate(-1)"><i class="fa fa-chevron-up"></i></button><button class="nav-btn" onclick="navigate(1)"><i class="fa fa-chevron-down"></i></button></div>
+        </section>
+
+        <!-- 11. TEMA 3.2 -->
+        <section class="slide">
+            <h2 class="title-header">5.2 Construcción Social</h2>
+            <div class="hero">
+                <p style="font-size: 1.4rem; margin-bottom: 2.5rem;">Las políticas públicas <strong>construyen ciudadanos</strong> y definen su relación con el Estado:</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; text-align: left;">
+                    <div class="card-panel" style="border-left-color: #2e7d32;">
+                        <h3 style="color: #2e7d32;">Construcciones Positivas</h3>
+                        <p>Generan eficacia y respeto; activan la participación democrática.</p>
+                    </div>
+                    <div class="card-panel" style="border-left-color: #c62828;">
+                        <h3 style="color: #c62828;">Construcciones Estigmatizadas</h3>
+                        <p>Burocracias punitivas que deprimen la vitalidad cívica de las poblaciones.</p>
+                    </div>
+                </div>
+                <span class="citation">Ingram & Schneider (2008, p. 177)</span>
+            </div>
+            <div class="slide-controls"><button class="nav-btn" onclick="navigate(-1)"><i class="fa fa-chevron-up"></i></button><button class="nav-btn" onclick="navigate(1)"><i class="fa fa-chevron-down"></i></button></div>
+        </section>
+
+        <!-- 12. TEMA 3.3 -->
+        <section class="slide">
+            <h2 class="title-header">5.3 El Poder del Encuadre</h2>
+            <div class="grid">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=1000" alt="Foro Público">
+                </div>
+                <div>
+                    <div class="quote" style="font-size: 1.5rem;">"Quien define el problema tiene el control del diseño de las soluciones"</div>
+                    <p>El analista debe desenmascarar las construcciones sociales degenerativas y excluyentes.</p>
+                    <span class="citation">Ingram & Schneider (2008, p. 174)</span>
+                </div>
+            </div>
+            <div class="slide-controls"><button class="nav-btn" onclick="navigate(-1)"><i class="fa fa-chevron-up"></i></button><button class="nav-btn" onclick="navigate(1)"><i class="fa fa-chevron-down"></i></button></div>
+        </section>
+
+        <!-- 13. TEMA 4.1 -->
+        <section class="slide">
+            <h2 class="title-header">6.1 Sociología de Instrumentos</h2>
+            <div class="grid">
+                <div>
+                    <p>Los instrumentos no son herramientas neutras; organizan relaciones de poder Estado-Sociedad.</p>
+                    <ul style="margin-top: 1.5rem; list-style: none;">
+                        <li style="margin-bottom: 1rem;"><i class="fa fa-check" style="color: var(--accent);"></i> <strong>Inercia:</strong> Resistencia al cambio externo.</li>
+                        <li style="margin-bottom: 1rem;"><i class="fa fa-check" style="color: var(--accent);"></i> <strong>Representación:</strong> Categorizan lo social.</li>
+                        <li><i class="fa fa-check" style="color: var(--accent);"></i> <strong>Problematización:</strong> Imponen causas.</li>
+                    </ul>
+                    <span class="citation">Lascoumes & Le Galès (2007, p. 4)</span>
+                </div>
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1503387762-592dea58ef23?auto=format&fit=crop&q=80&w=1000" alt="Planos y Estructura">
+                </div>
+            </div>
+            <div class="slide-controls"><button class="nav-btn" onclick="navigate(-1)"><i class="fa fa-chevron-up"></i></button><button class="nav-btn" onclick="navigate(1)"><i class="fa fa-chevron-down"></i></button></div>
+        </section>
+
+        <!-- 14. TEMA 4.2 -->
+        <section class="slide">
+            <h2 class="title-header">6.2 Metrovivienda (Bogotá)</h2>
+            <div class="hero">
+                <h3 style="margin-bottom: 1.5rem;">El Janus Conceptual</h3>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; text-align: left;">
+                    <div class="card-panel"><strong>Peñalosa</strong><br>Modelo financiero y de mercado (gestor de suelo).</div>
+                    <div class="card-panel"><strong>Mockus</strong><br>Modelo pedagógico y social (mejoramiento barrial).</div>
+                    <div class="card-panel"><strong>Garzón</strong><br>Modelo comunitario y popular (fricción por diseño original).</div>
+                </div>
+                <p style="margin-top: 2.5rem; font-style: italic;">La rigidez del instrumento condena los intentos de repolitización desfasada.</p>
+                <span class="citation">Jolly (2007, p. 67)</span>
+            </div>
+            <div class="slide-controls"><button class="nav-btn" onclick="navigate(-1)"><i class="fa fa-chevron-up"></i></button><button class="nav-btn" onclick="navigate(1)"><i class="fa fa-chevron-down"></i></button></div>
+        </section>
+
+        <!-- 15. TEMA 4.3 -->
+        <section class="slide">
+            <h2 class="title-header">6.3 Foros, Arenas y Cortes</h2>
+            <div class="grid">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&q=80&w=1000" alt="Foro de Diálogo">
+                </div>
+                <div>
+                    <p>La gestión de problemas complejos exige orquestar tres espacios fundamentales:</p>
+                    <div class="card-panel" style="margin-bottom: 0.8rem; padding: 1.2rem;"><strong>Foros:</strong> Donde se crea el significado y discurso.</div>
+                    <div class="card-panel" style="margin-bottom: 0.8rem; padding: 1.2rem;"><strong>Arenas:</strong> Donde se distribuyen recursos y se decide.</div>
+                    <div class="card-panel" style="padding: 1.2rem;"><strong>Cortes:</strong> Donde se juzga la legitimidad y el conflicto.</div>
+                    <span class="citation">Bryson, Crosby & Seo (2023, p. 203)</span>
+                </div>
+            </div>
+            <div class="slide-controls"><button class="nav-btn" onclick="navigate(-1)"><i class="fa fa-chevron-up"></i></button><button class="nav-btn" onclick="navigate(1)"><i class="fa fa-chevron-down"></i></button></div>
+        </section>
+
+        <!-- 16. CONCLUSIÓN -->
+        <section class="slide hero" style="background: var(--primary); color: white;">
+            <h2 class="title-header" style="color: var(--accent); border-bottom-color: var(--accent);">III. Síntesis Final</h2>
+            <div class="grid" style="text-align: left;">
+                <div style="font-family: 'Lora'; font-size: 1.6rem; color: #fff;">
+                    <p style="margin-bottom: 2rem;">La utopía tecnocrática de una administración aséptica ha caducado.</p>
+                    <p style="margin-bottom: 2rem;">La gobernanza contemporánea es el ejercicio de <strong>estructuración del poder</strong>.</p>
+                    <p>El analista debe ser un diseñador institucional de redes democráticas.</p>
+                </div>
+                <div class="image-container" style="border: none; background: rgba(255,255,255,0.1); box-shadow: none;">
+                    <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&q=80&w=1000" alt="Conocimiento">
+                </div>
+            </div>
+            <div class="slide-controls"><button class="nav-btn" onclick="navigate(-1)"><i class="fa fa-chevron-up" style="color: white;"></i></button><button class="nav-btn" onclick="navigate(1)"><i class="fa fa-chevron-down" style="color: white;"></i></button></div>
+        </section>
+
+        <!-- 17. GRACIAS -->
+        <section class="slide hero">
+            <h1 style="font-size: 5rem; color: var(--primary);">Gracias por su atención</h1>
+            <p style="font-size: 1.3rem; letter-spacing: 4px; margin-top: 1rem; color: var(--accent); font-weight: 600;">Políticas Públicas: La discusión actual</p>
+            <div style="margin-top: 4rem;"><i class="fa fa-university fa-4x" style="color: var(--primary);"></i></div>
+            <div class="slide-controls"><button class="nav-btn" onclick="navigate(-1)"><i class="fa fa-chevron-up"></i></button></div>
+        </section>
+
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll(".slide");
+        const navItems = document.querySelectorAll(".side-nav-item");
+        const progressBar = document.getElementById("progress-bar");
+
+        function updateProgress() {
+            const total = slides.length - 1;
+            const percentage = (currentSlide / total) * 100;
+            progressBar.style.width = percentage + "%";
+
+            // Highlight side nav
+            let activeGroupIdx = 0;
+            navItems.forEach((item, i) => {
+                const itemIndex = parseInt(item.getAttribute('onclick').match(/\d+/)[0]);
+                if (currentSlide >= itemIndex) {
+                    activeGroupIdx = i;
+                }
+            });
+
+            navItems.forEach((item, i) => {
+                if(i === activeGroupIdx) item.classList.add("active");
+                else item.classList.remove("active");
+            });
+        }
+
+        function navigate(direction) {
+            currentSlide = Math.max(0, Math.min(slides.length - 1, currentSlide + direction));
+            slides[currentSlide].scrollIntoView({ behavior: 'smooth' });
+            updateProgress();
+        }
+
+        function jumpTo(index) {
+            currentSlide = index;
+            slides[currentSlide].scrollIntoView({ behavior: 'smooth' });
+            updateProgress();
+        }
+
+        // Keyboard Controls
+        window.addEventListener('keydown', (e) => {
+            if (e.key === "ArrowDown" || e.key === "ArrowRight" || e.key === " ") {
+                e.preventDefault(); navigate(1);
+            } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+                e.preventDefault(); navigate(-1);
+            }
+        });
+
+        // Initialize progress on load
+        updateProgress();
+    </script>
+</body>
+</html>
