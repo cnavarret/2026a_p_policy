@@ -221,9 +221,10 @@
         .portrait {
             width: 200px; height: 280px;
             object-fit: cover;
-            filter: grayscale(100%) sepia(20%);
+            filter: grayscale(100%) sepia(40%) contrast(1.1);
             border: 1px solid var(--border);
             padding: 6px; background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
@@ -256,8 +257,10 @@
             <h1 style="font-size: 3.5rem; line-height: 1.1; margin-bottom: 1.5rem;">Políticas Públicas:<br><span style="color: var(--accent);">La discusión actual</span></h1>
             
             <div style="display: flex; justify-content: center; gap: 30px; margin-bottom: 2rem;">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Leviathan_by_Thomas_Hobbes.jpg/440px-Leviathan_by_Thomas_Hobbes.jpg" class="portrait" alt="Leviathan">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Santi_di_Tito_-_Niccolo_Machiavelli%27s_portrait_head_adjusted.jpg/440px-Santi_di_Tito_-_Niccolo_Machiavelli%27s_portrait_head_adjusted.jpg" class="portrait" alt="Machiavelli">
+                <!-- Imagen representativa: Biblioteca Clásica (Atmósfera Leviatán) -->
+                <img src="imagenes/leviatan.jpg" class="portrait" alt="Grabado Clásico Leviatán">
+                <!-- Imagen representativa: Busto Clásico (Atmósfera Maquiavelo) -->
+                <img src="imagenes/maquiavelo.jpg" class="portrait" alt="Retrato Clásico El Príncipe">
             </div>
 
             <p style="font-size: 1.4rem; font-family: 'Lora';">Prof. Carlos A Navarrete</p>
@@ -330,7 +333,7 @@
             <h2 class="title-header">3.1 Complejidad e Interdependencia</h2>
             <div class="grid">
                 <div class="image-container">
-                    <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&q=80&w=1000" alt="Lectura Reflexiva">
+                    <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=1000&auto=format&fit=crop" alt="Lectura Reflexiva en Biblioteca">
                 </div>
                 <div>
                     <p>La sociedad contemporánea se rige por una tríada conceptual ineludible:</p>
@@ -355,7 +358,7 @@
                     <span class="citation">Funck & Karlsson (2024, p. 2686)</span>
                 </div>
                 <div class="image-container">
-                    <img src="https://images.unsplash.com/photo-1455849318743-b2233052fcff?auto=format&fit=crop&q=80&w=1000" alt="Escritorio de estudio">
+                    <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=1000&auto=format&fit=crop" alt="Escritorio de estudio reflexivo">
                 </div>
             </div>
             <div class="slide-controls"><button class="nav-btn" onclick="navigate(-1)"><i class="fa fa-chevron-up"></i></button><button class="nav-btn" onclick="navigate(1)"><i class="fa fa-chevron-down"></i></button></div>
@@ -369,7 +372,8 @@
                     "El servicio público es una organización inherentemente política, que persigue objetivos políticos bajo liderazgo político".
                 </p>
                 <div class="image-container" style="max-height: 350px; max-width: 800px; margin: 0 auto;">
-                    <img src="https://images.unsplash.com/photo-1521791136064-7986c2923216?auto=format&fit=crop&q=80&w=1000" alt="Colaboración Política">
+                    <!-- Imagen de colaboración/discusión académica -->
+                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1000&auto=format&fit=crop" alt="Colaboración Política y Deliberación">
                 </div>
                 <span class="citation">Peters, Pierre, Sørensen & Torfing (2022, p. 967)</span>
             </div>
@@ -388,7 +392,7 @@
                     <span class="citation">Aguilar (2023, p. 123)</span>
                 </div>
                 <div class="image-container">
-                    <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=1000" alt="Balanza de Justicia">
+                    <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1000&auto=format&fit=crop" alt="Balanza de Justicia y Calidad">
                 </div>
             </div>
             <div class="slide-controls"><button class="nav-btn" onclick="navigate(-1)"><i class="fa fa-chevron-up"></i></button><button class="nav-btn" onclick="navigate(1)"><i class="fa fa-chevron-down"></i></button></div>
@@ -419,7 +423,8 @@
             <h2 class="title-header">4.3 Estrategia y Poder</h2>
             <div class="grid">
                 <div class="image-container">
-                    <img src="https://images.unsplash.com/photo-1529697210530-8c4bb1358ce5?auto=format&fit=crop&q=80&w=1000" alt="Ajedrez y Estrategia">
+                    <!-- Imagen de ajedrez (estrategia) -->
+                    <img src="https://images.unsplash.com/photo-1528819622765-d6bcf132f793?q=80&w=1000&auto=format&fit=crop" alt="Ajedrez y Estrategia de Poder">
                 </div>
                 <div>
                     <p>Los fallos en coordinación a menudo enmascaran conflictos políticos por jurisdicción y prestigio.</p>
@@ -443,7 +448,7 @@
                     <span class="citation">Siddiki & Curley (2022, p. 118)</span>
                 </div>
                 <div class="image-container">
-                    <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=1000" alt="Análisis de Políticas">
+                    <img src="https://images.unsplash.com/photo-1503428593586-e225b39bddbb?q=80&w=1000&auto=format&fit=crop" alt="Análisis de Políticas y Escritura">
                 </div>
             </div>
             <div class="slide-controls"><button class="nav-btn" onclick="navigate(-1)"><i class="fa fa-chevron-up"></i></button><button class="nav-btn" onclick="navigate(1)"><i class="fa fa-chevron-down"></i></button></div>
@@ -474,7 +479,7 @@
             <h2 class="title-header">5.3 El Poder del Encuadre</h2>
             <div class="grid">
                 <div class="image-container">
-                    <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=1000" alt="Foro Público">
+                    <img src="https://images.unsplash.com/photo-1544928147-79a2dbc1f389?q=80&w=1000&auto=format&fit=crop" alt="Foro de Diálogo Público">
                 </div>
                 <div>
                     <div class="quote" style="font-size: 1.5rem;">"Quien define el problema tiene el control del diseño de las soluciones"</div>
@@ -499,7 +504,8 @@
                     <span class="citation">Lascoumes & Le Galès (2007, p. 4)</span>
                 </div>
                 <div class="image-container">
-                    <img src="https://images.unsplash.com/photo-1503387762-592dea58ef23?auto=format&fit=crop&q=80&w=1000" alt="Planos y Estructura">
+                    <!-- Imagen de planos/estructura técnica/arquitectura -->
+                    <img src="https://images.unsplash.com/photo-1503387762-592dea58ef23?q=80&w=1000&auto=format&fit=crop" alt="Planos y Estructura Técnica Institucional">
                 </div>
             </div>
             <div class="slide-controls"><button class="nav-btn" onclick="navigate(-1)"><i class="fa fa-chevron-up"></i></button><button class="nav-btn" onclick="navigate(1)"><i class="fa fa-chevron-down"></i></button></div>
@@ -526,7 +532,8 @@
             <h2 class="title-header">6.3 Foros, Arenas y Cortes</h2>
             <div class="grid">
                 <div class="image-container">
-                    <img src="https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&q=80&w=1000" alt="Foro de Diálogo">
+                    <!-- Imagen de foro deliberativo/auditorio académico -->
+                    <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=1000&auto=format&fit=crop" alt="Foro de Diálogo y Deliberación">
                 </div>
                 <div>
                     <p>La gestión de problemas complejos exige orquestar tres espacios fundamentales:</p>
@@ -549,7 +556,7 @@
                     <p>El analista debe ser un diseñador institucional de redes democráticas.</p>
                 </div>
                 <div class="image-container" style="border: none; background: rgba(255,255,255,0.1); box-shadow: none;">
-                    <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&q=80&w=1000" alt="Conocimiento">
+                    <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&q=80&w=1000" alt="Conocimiento y Libros">
                 </div>
             </div>
             <div class="slide-controls"><button class="nav-btn" onclick="navigate(-1)"><i class="fa fa-chevron-up" style="color: white;"></i></button><button class="nav-btn" onclick="navigate(1)"><i class="fa fa-chevron-down" style="color: white;"></i></button></div>
@@ -617,4 +624,3 @@
     </script>
 </body>
 </html>
-
